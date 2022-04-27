@@ -39,22 +39,25 @@ public class googleTranslate {
         SelectLangDD.selectTargetLang(page,tarLang);
         SetText.setText(page,srcTextArea,initialTxt);
     }
-    @Test(priority = 0)
+    @Test(priority = 1)
     public void verifyResult(){
         page.waitForSelector(resultArea);
         Locator locator = page.locator(resultArea);
         Assert.assertEquals(locator.textContent().toLowerCase(),finalTxt);
     }
-    @Test(priority = 1)
-    public void clickSwap(){
-        String swapBtn="(//c-wiz[@jsrenderer='chbWbf']//div[@jscontroller='HwavCb']//div[3])[1]";
-        clicks.mouseClicks(page,swapBtn);
-        Locator locator = page.locator(resultArea);
-        Assert.assertEquals(locator.textContent().toLowerCase(),"demokratien");
-    }
     @Test(priority = 2)
+    public void clickSwap() throws IOException, ParseException {
+//        String swapBtn="(//c-wiz[@jsrenderer='chbWbf']//div[@jscontroller='HwavCb']//div[3])[1]";
+        String swapBtn= JsonReader.getPageObjects("swapBtn");
+        clicks.mouseClicks(page,swapBtn);
+        String resultPane=JsonReader.getPageObjects("resultArea");
+        Locator locator = page.locator(resultPane);
+        Assert.assertEquals(locator.textContent().toLowerCase(),initialTxt);
+    }
+    @Test(priority = 3)
     public void useScreenKeyboard() throws InterruptedException {
         page.fill(srcTextArea,"");
+        SelectLangDD.selectTargetLang(page,tarLang);
         String onScreenKeyboard="//a[@aria-label='Show the Input Tools menu']";
         clicks.mouseClicks(page,onScreenKeyboard);
         Locator locator = page.locator("//body//ul//li");
@@ -66,13 +69,12 @@ public class googleTranslate {
                 break;
             }
         }
-        String enterStr="hi";
+        String enterStr="Hi!";
         OnScreenKeyboard.selectKeys(page,enterStr);
         page.waitForSelector("//div[@dir='ltr']//div//div//div");
         clicks.mouseClicks(page,"//div[@dir='ltr']//div//div//div");
-        Locator field = page.locator(resultArea);
-//        SelectLangDD.selectTargetLang(page,tarLang);
-        Assert.assertEquals(field.textContent().toLowerCase(),"hallo");
+//        Locator field = page.locator(resultArea);
+
     }
     @AfterSuite
     public void closeAll(){

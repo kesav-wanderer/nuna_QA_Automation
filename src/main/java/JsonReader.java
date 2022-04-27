@@ -16,4 +16,13 @@ public class JsonReader {
         JSONObject jo = (JSONObject) obj;
         return (String) jo.get(field);
     }
+    public String getPageObjects(String elementName) throws IOException, ParseException {
+        // parsing file "JSONExample.json"
+        Object obj = new JSONParser().parse(new FileReader("src/main/resources/pageObjects.json"));
+
+        // typecasting obj to JSONObject
+        JSONObject jo = (JSONObject) obj;
+        return (String) jo.get(elementName);
+    }
+
 }

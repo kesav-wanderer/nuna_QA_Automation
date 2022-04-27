@@ -1,0 +1,4 @@
+{
+  "swapBtn": "(//c-wiz[@jsrenderer='chbWbf']//div[@jscontroller='HwavCb']//div[3])[1]",
+  "resultArea": "//c-wiz[@role='region']/div[@aria-live='polite']/div/div/span[1]/span[1]/span"
+}

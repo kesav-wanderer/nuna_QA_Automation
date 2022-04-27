@@ -1,13 +1,5 @@
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-////*[@id="K16"] //*[@id="kbd"]/div[2] vkochetkov@nuna.com
 public class OnScreenKeyboard {
 
     public void selectKeys(Page page, String letters) {
